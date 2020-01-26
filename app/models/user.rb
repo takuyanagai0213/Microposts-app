@@ -14,7 +14,7 @@ class User < ApplicationRecord
   
   has_many :favorites
   has_many :addfavorite, through: :favorites, source: :micropost
-  has_many :reverses_of_favorite, class_name: 'Favorite', foreign_key: 'micropost_id'
+  has_many :reverses_of_favorite, class_name: 'Favorite', foreign_key: 'user_id'
   has_many :favoriter, through: :reverses_of_favorite, source: :user
   
   def follow(other_user)
@@ -52,6 +52,4 @@ class User < ApplicationRecord
   def feed_favorites
     Favorite.where(micropost_id: self.addfavorite_ids + [self.id])
   end
-  
-  
 end
