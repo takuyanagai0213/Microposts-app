@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverses_of_relationship, source: :user
   
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :addfavorite, through: :favorites, source: :micropost
   has_many :reverses_of_favorite, class_name: 'Favorite', foreign_key: 'user_id'
   has_many :favoriter, through: :reverses_of_favorite, source: :user
